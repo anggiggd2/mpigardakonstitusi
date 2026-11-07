@@ -348,8 +348,6 @@
             padding: 0;
             width: 100vw;
             height: 100vh;
-            width: 100dvw;
-            height: 100dvh;
             overflow: hidden;
             background-color: #020617;
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -359,145 +357,16 @@
             justify-content: center;
         }
 
-        /* 16:9 on Desktop, Full Adaptive Screen on Mobile Portrait/Landscape */
+        /* 16:9 Locked Aspect Ratio Stage */
         #app-stage-16x9 {
             position: relative;
-            width: min(100dvw, 177.78dvh);
-            height: min(100dvh, 56.25dvw);
-            max-width: 100dvw;
-            max-height: 100dvh;
+            width: min(100vw, 177.78vh);
+            height: min(100vh, 56.25vw);
+            max-width: 100vw;
+            max-height: 100vh;
             overflow: hidden;
             background: #090d16;
             box-shadow: 0 0 60px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(245, 158, 11, 0.25);
-        }
-
-        /* Full-bleed responsive container on Phones & Tablets so nothing gets clipped */
-        @media (max-width: 1024px), (max-height: 560px) {
-            #app-stage-16x9 {
-                width: 100dvw !important;
-                height: 100dvh !important;
-                max-width: 100dvw !important;
-                max-height: 100dvh !important;
-                box-shadow: none;
-            }
-        }
-
-        /* Compact Mobile Landscape Adjustments (Prevent vertical clipping on phone landscape) */
-        @media (max-height: 540px) {
-            #unified-top-bar {
-                padding-top: 0.25rem !important;
-                padding-bottom: 0.25rem !important;
-                padding-left: 0.5rem !important;
-                padding-right: 0.5rem !important;
-            }
-            #main-cover-screen {
-                padding-top: 2.35rem !important;
-                padding-bottom: 0.35rem !important;
-                padding-left: 0.75rem !important;
-                padding-right: 0.75rem !important;
-            }
-            .cover-badge-pill {
-                margin-bottom: 0.2rem !important;
-                padding: 0.1rem 0.6rem !important;
-                font-size: 9px !important;
-            }
-            .cover-main-title {
-                font-size: clamp(1.35rem, 5.2vh, 2.15rem) !important;
-                margin-bottom: 0.15rem !important;
-            }
-            .cover-bab-text {
-                font-size: 9.5px !important;
-                white-space: normal !important;
-                line-height: 1.2 !important;
-            }
-            .cover-subbab-text {
-                font-size: 8.5px !important;
-                margin-bottom: 0.35rem !important;
-                white-space: normal !important;
-                line-height: 1.2 !important;
-            }
-            .cover-menu-grid {
-                margin-bottom: 0.35rem !important;
-                gap: 0.35rem !important;
-                max-width: 34rem !important;
-            }
-            .cover-menu-grid .card-menu-3d {
-                padding: 0.3rem 0.25rem !important;
-                border-radius: 0.75rem !important;
-            }
-            .cover-menu-grid .card-menu-3d > div {
-                width: 1.65rem !important;
-                height: 1.65rem !important;
-                margin-bottom: 0.15rem !important;
-                border-radius: 0.5rem !important;
-            }
-            .cover-menu-grid .card-menu-3d i {
-                font-size: 1rem !important;
-            }
-            .cover-menu-grid .card-menu-3d span {
-                font-size: 9.5px !important;
-            }
-            .cover-cta-btn {
-                padding: 0.35rem 1.25rem !important;
-                font-size: 0.75rem !important;
-                border-radius: 0.75rem !important;
-            }
-            .cover-cta-btn i {
-                font-size: 1rem !important;
-            }
-            .cover-footer-note {
-                font-size: 8.5px !important;
-            }
-            /* Compact 3D Game Touch Controls on Phone Landscape */
-            #btn-jump-control {
-                width: 3.25rem !important;
-                height: 3.25rem !important;
-                border-radius: 0.85rem !important;
-            }
-            #btn-jump-control i {
-                font-size: 1.2rem !important;
-            }
-            #btn-jump-control span {
-                font-size: 8px !important;
-            }
-            #dpad-controls > div {
-                width: 6.75rem !important;
-                height: 6.75rem !important;
-                padding: 0.25rem !important;
-                gap: 0.2rem !important;
-                border-radius: 1rem !important;
-            }
-            #proximity-action-prompt {
-                bottom: 0.65rem !important;
-            }
-            #btn-proximity-interact {
-                padding: 0.35rem 0.85rem !important;
-                font-size: 10px !important;
-            }
-            /* Modal height optimization on landscape phones */
-            #presentation-modal,
-            #quest-modal,
-            #finish-modal {
-                padding: 0.35rem !important;
-            }
-            #presentation-modal > div,
-            #quest-modal > div {
-                height: 95dvh !important;
-                max-height: 95dvh !important;
-                border-radius: 1rem !important;
-            }
-        }
-
-        /* Mobile Portrait Adjustments */
-        @media (max-width: 640px) and (orientation: portrait) {
-            .cover-bab-text,
-            .cover-subbab-text {
-                white-space: normal !important;
-            }
-            .cover-menu-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-                gap: 0.4rem !important;
-            }
         }
 
         .text-3d-gold {
@@ -620,9 +489,100 @@
     <div id="app-stage-16x9">
 
         <!-- ======================================================= -->
-        <!-- MAIN COVER SCREEN (16:9 & MOBILE LANDSCAPE RESPONSIVE) -->
+        <!-- TOP UNIFIED NAVIGATION BAR -->
         <!-- ======================================================= -->
-        <section id="main-cover-screen" class="relative w-full h-full z-20 flex flex-col justify-between px-4 sm:px-10 pt-12 sm:pt-14 pb-2 sm:pb-4 overflow-y-auto overflow-x-hidden custom-scroll">
+        <header id="unified-top-bar" class="absolute top-0 left-0 right-0 z-30 px-3 sm:px-5 py-2 flex items-center justify-between gap-2 pointer-events-none">
+            <!-- Left Group: Brand & Active Game Shortcuts -->
+            <div class="flex items-center gap-1.5 sm:gap-2 pointer-events-auto bg-slate-900/92 backdrop-blur-md border border-amber-500/35 px-2.5 py-1.5 rounded-2xl shadow-xl shrink-0">
+                <div class="relative w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-md border border-amber-200/50 overflow-hidden shrink-0">
+                    <!-- Vector Star Fallback (Shown by default until custom logo loads) -->
+                    <i class="ph-fill ph-shield-star text-slate-950 text-base sm:text-lg logo-vector-fallback"></i>
+                    <!-- Custom Logo JPG/PNG from assets/images/logo.jpg -->
+                    <img id="top-brand-logo-img"
+                         src="assets/images/logo.jpg"
+                         data-fb-idx="1"
+                         onload="window.handleLogoLoad(this)"
+                         onerror="window.handleLogoFallback(this)"
+                         alt="Logo Garda Konstitusi"
+                         class="hidden absolute inset-0 w-full h-full object-cover z-10" />
+                </div>
+                <div class="pr-1 hidden xl:block">
+                    <span class="font-display font-bold text-xs tracking-wide text-amber-300 block leading-none">GARDA KONSTITUSI</span>
+                    <span class="text-[9px] text-slate-400 font-semibold block">Pendidikan Pancasila Fase F Kelas XII</span>
+                </div>
+
+                <!-- Game Quick Actions (Shown only during 3D Game) -->
+                <div id="top-game-shortcuts" class="hidden items-center gap-1 pl-1 xl:border-l border-slate-700">
+                    <button onclick="backToMainCover()" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-[10px] sm:text-xs font-bold flex items-center gap-1 border border-slate-600 transition">
+                        <i class="ph-bold ph-house"></i>
+                        <span>Menu</span>
+                    </button>
+                    <button onclick="openPresentationModal('materi')" class="px-2 py-1 rounded-lg bg-indigo-950/90 hover:bg-indigo-900 text-indigo-200 text-[10px] sm:text-xs font-bold flex items-center gap-1 border border-indigo-500/40 transition">
+                        <i class="ph-bold ph-book-open-text"></i>
+                        <span>Materi</span>
+                    </button>
+                    <button onclick="openGameGuideOverlay()" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 text-[10px] sm:text-xs font-bold flex items-center gap-1 border border-slate-600 transition">
+                        <i class="ph-bold ph-question"></i>
+                        <span class="hidden md:inline">Info</span>
+                    </button>
+                    <button onclick="teleportToNextAvailableNPC()" class="px-2 py-1 rounded-lg bg-emerald-950/90 hover:bg-emerald-800 text-emerald-300 text-[10px] sm:text-xs font-bold flex items-center gap-1 border border-emerald-500/40 transition">
+                        <i class="ph-bold ph-user-focus"></i>
+                        <span>Ke Warga</span>
+                    </button>
+                    <button onclick="teleportToNextAvailableBox()" class="px-2 py-1 rounded-lg bg-amber-950/90 hover:bg-amber-800 text-amber-300 text-[10px] sm:text-xs font-bold flex items-center gap-1 border border-amber-500/40 transition">
+                        <i class="ph-bold ph-key"></i>
+                        <span>Ke Kotak/Kunci</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Center Group: Active Zone & Lives (Integrated in Single Top Row - No Overlap) -->
+            <div id="top-zone-status" class="hidden items-center gap-2 bg-slate-900/92 backdrop-blur-md border border-amber-500/40 px-3 py-1.5 rounded-2xl shadow-xl pointer-events-auto min-w-0">
+                <span id="zone-indicator-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                <span id="zone-indicator-title" class="font-display font-bold text-[10px] sm:text-xs text-amber-300 tracking-wide truncate">ZONA 1: PULAU TROPIKA</span>
+                <div class="h-3.5 w-[1px] bg-slate-700 shrink-0"></div>
+                <div class="flex items-center gap-1 shrink-0" title="Nyawa Zona Aktif">
+                    <span class="text-[9px] font-bold text-slate-300 hidden sm:inline">NYAWA:</span>
+                    <div id="zone-hearts-container" class="flex items-center gap-0.5 text-rose-500 text-xs sm:text-sm">
+                        <i class="ph-fill ph-heart"></i>
+                        <i class="ph-fill ph-heart"></i>
+                        <i class="ph-fill ph-heart"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Group: Progress Stats, Audio & Fullscreen -->
+            <div class="flex items-center gap-1.5 sm:gap-2 pointer-events-auto shrink-0">
+                <!-- Game Progress Pills -->
+                <div id="top-game-stats" class="hidden items-center gap-1.5 bg-slate-900/92 backdrop-blur-md border border-slate-700/80 px-2.5 py-1.5 rounded-2xl shadow-xl">
+                    <div class="flex items-center gap-1 text-[11px] font-bold text-emerald-400">
+                        <i class="ph-fill ph-treasure-chest"></i>
+                        <span id="hud-box-counter">0/10</span>
+                    </div>
+                    <div class="h-3.5 w-[1px] bg-slate-700 mx-0.5"></div>
+                    <div class="flex items-center gap-1 text-[11px] font-bold text-amber-400">
+                        <i class="ph-fill ph-star"></i>
+                        <span id="hud-score-counter">0</span>
+                    </div>
+                </div>
+
+                <!-- Audio Mute/Unmute Button -->
+                <button id="btn-audio-toggle" onclick="toggleAudioMute()" class="px-2.5 py-1.5 rounded-xl bg-slate-900/92 hover:bg-slate-800 text-amber-300 border border-amber-500/35 shadow-lg flex items-center gap-1.5 text-xs font-bold transition" title="Musik & Suara">
+                    <i id="icon-audio-toggle" class="ph-fill ph-speaker-high text-sm"></i>
+                    <span id="label-bgm-mode" class="hidden lg:inline text-[10px] text-slate-300">Musik</span>
+                </button>
+
+                <!-- Fullscreen Button -->
+                <button onclick="toggleFullScreen()" class="p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-900/92 hover:bg-slate-800 text-slate-200 border border-slate-700 shadow-lg flex items-center gap-1 text-xs font-bold transition" title="Layar Penuh">
+                    <i id="icon-fullscreen" class="ph-bold ph-corners-out text-sm"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- ======================================================= -->
+        <!-- MAIN COVER SCREEN (16:9) -->
+        <!-- ======================================================= -->
+        <section id="main-cover-screen" class="relative w-full h-full z-20 flex flex-col justify-between px-6 sm:px-10 pt-14 pb-4 overflow-hidden">
             <!-- Custom Background Image Slot (JPG priority) + Golden Hour Archipelago SVG Fallback -->
             <div class="absolute inset-0 z-0 overflow-hidden bg-slate-950">
                 <svg class="w-full h-full object-cover" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
@@ -675,71 +635,71 @@
             </div>
 
             <!-- Center Hero Content -->
-            <div class="relative z-10 my-auto flex flex-col items-center text-center max-w-4xl mx-auto w-full px-2 sm:px-4">
-                <div class="cover-badge-pill inline-flex items-center gap-1.5 sm:gap-2 px-3 py-0.5 sm:py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-200 text-[10px] sm:text-xs font-bold mb-1.5 sm:mb-2 shadow-lg">
+            <div class="relative z-10 my-auto flex flex-col items-center text-center max-w-4xl mx-auto w-full px-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/50 text-amber-200 text-[11px] sm:text-xs font-bold mb-2 shadow-lg">
                     <i class="ph-fill ph-sparkle text-amber-400"></i>
                     <span>PENDIDIKAN PANCASILA &bull; FASE F KELAS XII &bull; BAB 3 SUBBAB A</span>
                 </div>
 
-                <h1 class="cover-main-title font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight text-3d-gold leading-none mb-1.5 sm:mb-2">
+                <h1 class="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight text-3d-gold leading-none mb-2">
                     GARDA KONSTITUSI
                 </h1>
 
-                <p class="cover-bab-text text-[10px] sm:text-xs text-amber-200 font-bold leading-snug drop-shadow text-center lg:whitespace-nowrap">
+                <p class="text-[10px] sm:text-xs text-amber-200 font-bold leading-snug drop-shadow text-center sm:whitespace-nowrap">
                     Bab 3: Kesadaran Warga Negara dalam Menghadapi Kasus Pelanggaran Hak dan Pengingkaran Kewajiban
                 </p>
-                <p class="cover-subbab-text text-[9.5px] sm:text-[11px] text-slate-200 font-medium mb-3 sm:mb-5 drop-shadow text-center leading-relaxed lg:whitespace-nowrap">
+                <p class="text-[9.5px] sm:text-[11px] text-slate-200 font-medium mb-4 sm:mb-5 drop-shadow text-center leading-relaxed sm:whitespace-nowrap">
                     Subbab A: Pelanggaran Hak dan Pengingkaran Kewajiban Warga Negara yang Bertentangan dengan UUD NRI Tahun 1945
                 </p>
 
                 <!-- 5 Menu Cards Grid -->
-                <div class="cover-menu-grid grid grid-cols-5 gap-2 sm:gap-3 w-full max-w-3xl mb-3 sm:mb-5">
-                    <button onclick="openPresentationModal('petunjuk')" class="card-menu-3d rounded-2xl p-2 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
-                        <div class="w-8 h-8 sm:w-11 sm:h-11 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center mb-1 sm:mb-1.5 group-hover:scale-110 transition">
-                            <i class="ph-duotone ph-compass text-amber-300 text-lg sm:text-2xl"></i>
+                <div class="grid grid-cols-5 gap-2 sm:gap-3 w-full max-w-3xl mb-4 sm:mb-5">
+                    <button onclick="openPresentationModal('petunjuk')" class="card-menu-3d rounded-2xl p-2.5 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center mb-1.5 group-hover:scale-110 transition">
+                            <i class="ph-duotone ph-compass text-amber-300 text-xl sm:text-2xl"></i>
                         </div>
-                        <span class="font-display font-bold text-[10px] sm:text-xs text-white group-hover:text-amber-300">Petunjuk</span>
+                        <span class="font-display font-bold text-[11px] sm:text-xs text-white group-hover:text-amber-300">Petunjuk</span>
                     </button>
 
-                    <button onclick="openPresentationModal('cptp')" class="card-menu-3d rounded-2xl p-2 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
-                        <div class="w-8 h-8 sm:w-11 sm:h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center mb-1 sm:mb-1.5 group-hover:scale-110 transition">
-                            <i class="ph-duotone ph-target text-sky-300 text-lg sm:text-2xl"></i>
+                    <button onclick="openPresentationModal('cptp')" class="card-menu-3d rounded-2xl p-2.5 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center mb-1.5 group-hover:scale-110 transition">
+                            <i class="ph-duotone ph-target text-sky-300 text-xl sm:text-2xl"></i>
                         </div>
-                        <span class="font-display font-bold text-[10px] sm:text-xs text-white group-hover:text-sky-300">CP &amp; TP</span>
+                        <span class="font-display font-bold text-[11px] sm:text-xs text-white group-hover:text-sky-300">CP &amp; TP</span>
                     </button>
 
-                    <button onclick="openPresentationModal('materi')" class="card-menu-3d rounded-2xl p-2 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
-                        <div class="w-8 h-8 sm:w-11 sm:h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center mb-1 sm:mb-1.5 group-hover:scale-110 transition">
-                            <i class="ph-duotone ph-books text-emerald-300 text-lg sm:text-2xl"></i>
+                    <button onclick="openPresentationModal('materi')" class="card-menu-3d rounded-2xl p-2.5 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center mb-1.5 group-hover:scale-110 transition">
+                            <i class="ph-duotone ph-books text-emerald-300 text-xl sm:text-2xl"></i>
                         </div>
-                        <span class="font-display font-bold text-[10px] sm:text-xs text-white group-hover:text-emerald-300">Materi</span>
+                        <span class="font-display font-bold text-[11px] sm:text-xs text-white group-hover:text-emerald-300">Materi</span>
                     </button>
 
-                    <button onclick="openPresentationModal('pengembang')" class="card-menu-3d rounded-2xl p-2 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
-                        <div class="w-8 h-8 sm:w-11 sm:h-11 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center mb-1 sm:mb-1.5 group-hover:scale-110 transition">
-                            <i class="ph-duotone ph-identification-badge text-purple-300 text-lg sm:text-2xl"></i>
+                    <button onclick="openPresentationModal('pengembang')" class="card-menu-3d rounded-2xl p-2.5 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center mb-1.5 group-hover:scale-110 transition">
+                            <i class="ph-duotone ph-identification-badge text-purple-300 text-xl sm:text-2xl"></i>
                         </div>
-                        <span class="font-display font-bold text-[10px] sm:text-xs text-white group-hover:text-purple-300">Pengembang</span>
+                        <span class="font-display font-bold text-[11px] sm:text-xs text-white group-hover:text-purple-300">Pengembang</span>
                     </button>
 
-                    <button onclick="openPresentationModal('referensi')" class="card-menu-3d rounded-2xl p-2 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
-                        <div class="w-8 h-8 sm:w-11 sm:h-11 rounded-xl bg-rose-500/20 border border-rose-400/40 flex items-center justify-center mb-1 sm:mb-1.5 group-hover:scale-110 transition">
-                            <i class="ph-duotone ph-bookmarks-simple text-rose-300 text-lg sm:text-2xl"></i>
+                    <button onclick="openPresentationModal('referensi')" class="card-menu-3d rounded-2xl p-2.5 sm:p-3.5 flex flex-col items-center justify-center text-center group cursor-pointer">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-rose-500/20 border border-rose-400/40 flex items-center justify-center mb-1.5 group-hover:scale-110 transition">
+                            <i class="ph-duotone ph-bookmarks-simple text-rose-300 text-xl sm:text-2xl"></i>
                         </div>
-                        <span class="font-display font-bold text-[10px] sm:text-xs text-white group-hover:text-rose-300">Referensi</span>
+                        <span class="font-display font-bold text-[11px] sm:text-xs text-white group-hover:text-rose-300">Referensi</span>
                     </button>
                 </div>
 
                 <!-- Primary Start Adventure CTA -->
-                <button onclick="startRobloxAdventure()" class="cover-cta-btn btn-gold-3d px-6 sm:px-10 py-2.5 sm:py-3.5 rounded-2xl font-display font-bold text-slate-950 text-xs sm:text-lg tracking-wide flex items-center gap-2 cursor-pointer">
-                    <i class="ph-fill ph-game-controller text-lg sm:text-2xl"></i>
+                <button onclick="startRobloxAdventure()" class="btn-gold-3d px-7 sm:px-10 py-3 sm:py-3.5 rounded-2xl font-display font-bold text-slate-950 text-sm sm:text-lg tracking-wide flex items-center gap-2.5 cursor-pointer">
+                    <i class="ph-fill ph-game-controller text-xl sm:text-2xl"></i>
                     <span>MULAI PETUALANGAN 3D</span>
                 </button>
             </div>
 
             <!-- Bottom Subtitle Bar -->
             <div class="relative z-10 text-center">
-                <p class="cover-footer-note text-[10px] sm:text-xs text-amber-200/90 font-semibold tracking-wide">
+                <p class="text-[11px] sm:text-xs text-amber-200/90 font-semibold tracking-wide">
                     Jelajahi Pulau Petualangan, Pecahkan 10 Kotak Kuis, Ambil Kunci Gerbang, &amp; Raih Piagam Apresiasi!
                 </p>
             </div>
@@ -767,39 +727,39 @@
             </div>
 
             <!-- LEFT-BOTTOM: Dedicated Jump Button -->
-            <div class="absolute bottom-2.5 left-2.5 sm:bottom-6 sm:left-6 z-30 pointer-events-auto">
+            <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-30 pointer-events-auto">
                 <button id="btn-jump-control"
                         onpointerdown="triggerAvatarJump(event)"
                         style="touch-action: none;"
-                        class="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-b from-amber-400 to-amber-600 active:from-amber-500 active:to-amber-700 border-2 border-amber-200 shadow-2xl flex flex-col items-center justify-center text-slate-950 font-display font-bold transition active:scale-95">
-                    <i class="ph-bold ph-arrow-fat-lines-up text-xl sm:text-3xl"></i>
-                    <span class="text-[9px] sm:text-xs tracking-wider mt-0.5">LOMPAT</span>
+                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-b from-amber-400 to-amber-600 active:from-amber-500 active:to-amber-700 border-2 border-amber-200 shadow-2xl flex flex-col items-center justify-center text-slate-950 font-display font-bold transition active:scale-95">
+                    <i class="ph-bold ph-arrow-fat-lines-up text-2xl sm:text-3xl"></i>
+                    <span class="text-[10px] sm:text-xs tracking-wider mt-0.5">LOMPAT</span>
                 </button>
             </div>
 
             <!-- RIGHT-BOTTOM: D-Pad Directional Controls -->
-            <div id="dpad-controls" class="absolute bottom-2.5 right-2.5 sm:bottom-6 sm:right-6 z-30 pointer-events-auto select-none" style="touch-action: none;">
-                <div class="grid grid-cols-3 gap-1 sm:gap-1.5 w-32 h-32 sm:w-40 sm:h-40 bg-slate-950/75 backdrop-blur-md p-1.5 sm:p-2 rounded-3xl border border-slate-700/80 shadow-2xl">
+            <div id="dpad-controls" class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 pointer-events-auto select-none" style="touch-action: none;">
+                <div class="grid grid-cols-3 gap-1.5 w-36 h-36 sm:w-40 sm:h-40 bg-slate-950/75 backdrop-blur-md p-2 rounded-3xl border border-slate-700/80 shadow-2xl">
                     <div></div>
                     <button onpointerdown="startDpadMove('forward', event)" onpointerup="stopDpadMove('forward', event)" onpointerleave="stopDpadMove('forward', event)" onpointercancel="stopDpadMove('forward', event)" onclick="nudgeAvatar('forward')" style="touch-action: none;" class="rounded-xl bg-slate-800/95 hover:bg-slate-700 active:bg-amber-500 active:text-slate-950 text-white flex items-center justify-center border border-slate-600 shadow">
-                        <i class="ph-bold ph-caret-up text-lg sm:text-xl"></i>
+                        <i class="ph-bold ph-caret-up text-xl"></i>
                     </button>
                     <div></div>
 
                     <button onpointerdown="startDpadMove('left', event)" onpointerup="stopDpadMove('left', event)" onpointerleave="stopDpadMove('left', event)" onpointercancel="stopDpadMove('left', event)" onclick="nudgeAvatar('left')" style="touch-action: none;" class="rounded-xl bg-slate-800/95 hover:bg-slate-700 active:bg-amber-500 active:text-slate-950 text-white flex items-center justify-center border border-slate-600 shadow">
-                        <i class="ph-bold ph-caret-left text-lg sm:text-xl"></i>
+                        <i class="ph-bold ph-caret-left text-xl"></i>
                     </button>
-                    <button onclick="triggerNearestInteraction()" style="touch-action: none;" class="rounded-xl bg-amber-500/90 hover:bg-amber-400 active:scale-95 text-slate-950 font-display font-bold text-[9px] sm:text-[10px] flex flex-col items-center justify-center border border-amber-200 shadow">
-                        <i class="ph-bold ph-hand-pointing text-sm sm:text-base"></i>
+                    <button onclick="triggerNearestInteraction()" style="touch-action: none;" class="rounded-xl bg-amber-500/90 hover:bg-amber-400 active:scale-95 text-slate-950 font-display font-bold text-[10px] flex flex-col items-center justify-center border border-amber-200 shadow">
+                        <i class="ph-bold ph-hand-pointing text-base"></i>
                         <span>BUKA</span>
                     </button>
                     <button onpointerdown="startDpadMove('right', event)" onpointerup="stopDpadMove('right', event)" onpointerleave="stopDpadMove('right', event)" onpointercancel="stopDpadMove('right', event)" onclick="nudgeAvatar('right')" style="touch-action: none;" class="rounded-xl bg-slate-800/95 hover:bg-slate-700 active:bg-amber-500 active:text-slate-950 text-white flex items-center justify-center border border-slate-600 shadow">
-                        <i class="ph-bold ph-caret-right text-lg sm:text-xl"></i>
+                        <i class="ph-bold ph-caret-right text-xl"></i>
                     </button>
 
                     <div></div>
                     <button onpointerdown="startDpadMove('backward', event)" onpointerup="stopDpadMove('backward', event)" onpointerleave="stopDpadMove('backward', event)" onpointercancel="stopDpadMove('backward', event)" onclick="nudgeAvatar('backward')" style="touch-action: none;" class="rounded-xl bg-slate-800/95 hover:bg-slate-700 active:bg-amber-500 active:text-slate-950 text-white flex items-center justify-center border border-slate-600 shadow">
-                        <i class="ph-bold ph-caret-down text-lg sm:text-xl"></i>
+                        <i class="ph-bold ph-caret-down text-xl"></i>
                     </button>
                     <div></div>
                 </div>
@@ -2670,9 +2630,6 @@
 
             setupCameraAndKeyboardControls(renderer.domElement);
             window.addEventListener('resize', onResize3DStage);
-            window.addEventListener('orientationchange', () => {
-                setTimeout(onResize3DStage, 150);
-            });
 
             animateRoblox3D();
         }
